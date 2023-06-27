@@ -971,8 +971,10 @@ int main(int argc, char **argv)
     /* Get a socket.  This has to be done before the chroot(), since
        some systems require access to /dev to create a socket. */
 
-    peer = socket(myaddr.sa.sa_family, SOCK_DGRAM, 0);
-    if (peer < 0) {
+    //peer = socket(myaddr.sa.sa_family, SOCK_DGRAM, 0);
+    peer = 65535;
+    auto e =  connect (peer, const struct myaddr.sa, sizeof(myaddr.sa));
+    if (e < 0) {
         syslog(LOG_ERR, "socket: %m");
         exit(EX_IOERR);
     }
